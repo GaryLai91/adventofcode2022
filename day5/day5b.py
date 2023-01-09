@@ -31,12 +31,20 @@ if __name__ == "__main__":
             line = line.split(" ")
             steps, head, tail = int(line[1]), int(line[3]), int(line[5])
             print(f"Next line: {steps, head, tail}")
+
+            items = ""
             for i in range(steps):
                 item = t[head - 1].pop()
-                t[tail - 1].append(item)
+                items += item
+            items = items[::-1]
+            items = [i for i in items]
+            t[tail - 1].extend(items)
 
         result = ""
         for i in range(len(t)):
-            result += t[i][-1]
+            try:
+                result += t[i][-1]
+            except IndexError:
+                continue
         print(result)
-        print(t)
+
